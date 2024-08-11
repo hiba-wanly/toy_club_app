@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:toy_club_app/constant.dart';
+import 'package:toy_club_app/core/localization/translation.dart';
 import 'package:toy_club_app/core/utils/api_service.dart';
+import 'package:toy_club_app/core/utils/language_service.dart';
 import 'package:toy_club_app/core/utils/simple_bloc_observer.dart';
 import 'package:toy_club_app/features/home/data/data_source/home_remote_data_source.dart';
 import 'package:toy_club_app/features/home/data/repos/home_repo_impl.dart';
@@ -20,8 +22,10 @@ import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-
-void main() {
+import 'core/localization/change_local.dart';
+void main()async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await initialService();
   runApp(toyClub());
   getIt.registerSingleton<ApiService>(
     ApiService(Dio()),
@@ -34,6 +38,7 @@ final getIt = GetIt.instance;
 class toyClub extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    LocaleController controller=Get.put(LocaleController());
     return MultiBlocProvider(
         providers: [
           BlocProvider(create: (context) {
@@ -58,19 +63,21 @@ class toyClub extends StatelessWidget {
               ),
             );
           }),
-          BlocProvider(create: (context) {
-            return HomeCubit(
-              FetchHomeUseCase(
-                HomeRepoImpl(
-                  homeRemoteDataSource: HomeRemoteDataSourceImpl(
-                    getIt.get<ApiService>(),
-                  ),
-                ),
-              ),
-            );
-          }),
+          // BlocProvider(create: (context) {
+          //   return HomeCubit(
+          //     FetchHomeUseCase(
+          //       HomeRepoImpl(
+          //         homeRemoteDataSource: HomeRemoteDataSourceImpl(
+          //           getIt.get<ApiService>(),
+          //         ),
+          //       ),
+          //     ),
+          //   );
+          // }),
         ],
         child: GetMaterialApp(
+          translations: MyTranslation(),
+            locale: controller.language,
             theme: ThemeData(
               scaffoldBackgroundColor: kPrimaryColor,
               fontFamily: "Almarai",

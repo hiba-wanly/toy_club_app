@@ -14,7 +14,8 @@ class SignupRemoteDataSourceImpl extends SignupRemoteDataSource {
 
   @override
   Future<SignUp> fetchSignupData(Map<String, dynamic> data2) async {
-    var data = await apiService.post(data1: data2, endPoint: 'user/register');
+    debugPrint("DDDDDDDDDDDDDDDDDDDd");
+    var data = await apiService.post(data1: data2, endPoint: 'api/register');
     debugPrint("WEAREHERE12121212121222");
     debugPrint(data.toString());
     SignUp nums = getSignup(data);

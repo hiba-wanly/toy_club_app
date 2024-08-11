@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:toy_club_app/constant.dart';
 import 'package:toy_club_app/core/widgets/primary_header_container.dart';
 import 'package:toy_club_app/features/favorite/presentation/views/friendslist_tabbar_view.dart';
@@ -18,7 +19,7 @@ class _WishlistViewState extends State<WishlistView> with TickerProviderStateMix
     h = MediaQuery.of(context).size.height;
     w = MediaQuery.of(context).size.width;
     TabController tabController = TabController(length: 2, vsync: this);
-    return Directionality(textDirection: TextDirection.rtl, child: Scaffold(
+    return Scaffold(
     resizeToAvoidBottomInset: true,
     extendBodyBehindAppBar: true,
     body:NestedScrollView(
@@ -32,7 +33,7 @@ class _WishlistViewState extends State<WishlistView> with TickerProviderStateMix
         TPrimaryHeaderContainer(
           w: w,
           h: h,
-          text: "المفضلة",
+          text: "favorite".tr,
           img: AppImagesAssets.detailAppBar,
         ),
         Align(
@@ -49,14 +50,14 @@ class _WishlistViewState extends State<WishlistView> with TickerProviderStateMix
             tabs: [
               Tab(
                   child: Text(
-                    "قائمتي",
+                    "my list".tr ,
                     overflow: TextOverflow.clip,
                     maxLines: 1,
                     style: TextStyle(fontFamily: Almarai, fontSize: w * 0.05),
                   )),
               Tab(
                   child: Text(
-                    "قائمة أصدقائي",
+                    "friend's list".tr,
                     overflow: TextOverflow.clip,
                     maxLines: 1,
                     style: TextStyle(fontFamily: Almarai, fontSize: w * 0.05),
@@ -85,6 +86,6 @@ class _WishlistViewState extends State<WishlistView> with TickerProviderStateMix
         ),
       ],
     ),)
-    ));
+    );
   }
 }

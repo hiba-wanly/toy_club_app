@@ -6,6 +6,7 @@ import 'package:toy_club_app/constant.dart';
 import 'package:toy_club_app/core/widgets/auth/custom_textform_auth.dart';
 import 'package:toy_club_app/features/home/presentation/views/home_view.dart';
 import 'package:toy_club_app/features/login/presentation/views/widgets/custom_button_auth.dart';
+import 'package:toy_club_app/features/signup/data/models/signup_model.dart';
 import 'package:toy_club_app/features/signup/presentation/manager/signup_cubit/signup_cubit.dart';
 import 'package:toy_club_app/features/signup/presentation/manager/signup_cubit/signup_state.dart';
 
@@ -30,172 +31,184 @@ class _SignUpViewState extends State<SignUpView> {
   TextEditingController addressController = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
   TextEditingController telegramIdController = TextEditingController();
-
+ late SignUp signUp;
   @override
   Widget build(BuildContext context) {
     h = MediaQuery.of(context).size.height;
     w = MediaQuery.of(context).size.width;
 
-    return Directionality(
-      textDirection: TextDirection.rtl,
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(
-            "إنشاء حساب",
-            style: Theme.of(context)
-                .textTheme
-                .headlineSmall!
-                .copyWith(color: Colors.grey),
-          ),
-          backgroundColor: kPrimaryColor,
-          centerTitle: true,
-          elevation: 0.0,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "Registration".tr,
+          style: Theme.of(context)
+              .textTheme
+              .headlineSmall!
+              .copyWith(color: Colors.grey),
         ),
-        body: Form(
-          key: formkey,
-          child: Container(
-            padding:
-                EdgeInsets.symmetric(horizontal: w * 0.06, vertical: h * 0.02),
-            child: Center(
-              child: ListView(
-                children: [
-                  SizedBox(
-                    height: h * 0.01,
-                  ),
-                  CustomTextFormAuth(
-                    hintText: "",
-                    labeltext: "الاسم الأول",
-                    iconData: null,
-                    mycontroller: firstnameController,
-                    textInputType: TextInputType.text,
-                    pass: false,
-                    ispassword: ispassword,
-                  ),
+        backgroundColor: kPrimaryColor,
+        centerTitle: true,
+        elevation: 0.0,
+      ),
+      body: Form(
+        key: formkey,
+        child: Container(
+          padding:
+              EdgeInsets.symmetric(horizontal: w * 0.06, vertical: h * 0.02),
+          child: Center(
+            child: ListView(
+              children: [
+                SizedBox(
+                  height: h * 0.01,
+                ),
+                CustomTextFormAuth(
+                  hintText: "",
+                  labeltext: "first name".tr,
+                  iconData: null,
+                  mycontroller: firstnameController,
+                  textInputType: TextInputType.text,
+                  pass: false,
+                  ispassword: ispassword,
+                ),
 
-                  CustomTextFormAuth(
-                    hintText: "",
-                    labeltext: "الاسم الأخير",
-                    iconData: null,
-                    mycontroller: lastnameController,
-                    textInputType: TextInputType.text,
-                    pass: false,
-                    ispassword: ispassword,
-                  ),
-                  CustomTextFormAuth(
-                    hintText: 'أنشئ بريدك الالكتروني',
-                    labeltext: 'البريد الالكتروني',
-                    iconData: Icons.email_outlined,
-                    mycontroller: emailController,
-                    textInputType: TextInputType.visiblePassword,
-                    pass: false,
-                    ispassword: ispassword,
-                  ),
-                  CustomTextFormAuth(
-                    hintText: "أدخل اسم المستخدم",
-                    labeltext: "اسم المستخدم",
-                    iconData: Icons.lock_outline,
-                    mycontroller: usernameController,
-                    textInputType: TextInputType.visiblePassword,
-                    pass: false,
-                    ispassword: ispassword,
-                  ),
+                CustomTextFormAuth(
+                  hintText: "",
+                  labeltext:"last name".tr,
+                  iconData: null,
+                  mycontroller: lastnameController,
+                  textInputType: TextInputType.text,
+                  pass: false,
+                  ispassword: ispassword,
+                ),
+                CustomTextFormAuth(
+                  hintText: "create your email".tr,
+                  labeltext:"email".tr,
+                  iconData: Icons.email_outlined,
+                  mycontroller: emailController,
+                  textInputType: TextInputType.visiblePassword,
+                  pass: false,
+                  ispassword: ispassword,
+                ),
+                CustomTextFormAuth(
+                  hintText:"enter the user name".tr ,
+                  labeltext: "user name".tr,
+                  iconData: Icons.lock_outline,
+                  mycontroller: usernameController,
+                  textInputType: TextInputType.visiblePassword,
+                  pass: false,
+                  ispassword: ispassword,
+                ),
 
-                  CustomTextFormAuth(
-                    hintText: "أدخل كلمة المرور",
-                    labeltext: "كلمة المرور",
-                    iconData: Icons.lock_outline,
-                    mycontroller: passwordController,
-                    textInputType: TextInputType.visiblePassword,
-                    pass: true,
-                    ispassword: ispassword,
-                  ),
-                  CustomTextFormAuth(
-                    hintText: "أدخل عنوانك",
-                    labeltext: "العنوان",
-                    iconData: Icons.email_outlined,
-                    mycontroller: addressController,
-                    textInputType: TextInputType.visiblePassword,
-                    pass: false,
-                    ispassword: ispassword,
-                  ),
-                  CustomTextFormAuth(
-                    hintText: "أدخل رقم هاتفك",
-                    labeltext: "رقم الهاتف",
-                    iconData: Icons.phone_enabled_rounded,
-                    mycontroller: phoneNumberController,
-                    textInputType: TextInputType.visiblePassword,
-                    pass: false,
-                    ispassword: ispassword,
-                  ),
-                  CustomTextFormAuth(
-                    hintText: "أدخل معرف التلغرام الخاص بك",
-                    labeltext: "معرف التلغرام",
-                    iconData: Icons.email_outlined,
-                    mycontroller: telegramIdController,
-                    textInputType: TextInputType.visiblePassword,
-                    pass: false,
-                    ispassword: ispassword,
-                  ),
-                  BlocConsumer<SignupCubit, SignupState>(
-                      listener: (context, state) {
-                    if (state is SignupSuccess) {
-                      Get.to(HomeView());
-                    }
-                    if (state is SignupFailure) {
-                      debugPrint("kkkLoginFailure");
-                      Flushbar(
-                        duration: const Duration(seconds: 3),
-                        backgroundColor: Colors.white,
-                        messageColor: Colors.black,
-                        messageSize: h * 0.02,
-                        message: "لا يمكن اتمام العملية الأن",
-                      ).show(context);
-                      // Navigator.pop(context);
-                    }
-                  }, builder: (context, state) {
-                    if (state is SignupLoading) {
-                      return
+                CustomTextFormAuth(
+                  hintText:"enter password".tr,
+                  labeltext: "password".tr,
+                  iconData: Icons.lock_outline,
+                  mycontroller: passwordController,
+                  textInputType: TextInputType.visiblePassword,
+                  pass: true,
+                  ispassword: ispassword,
+                ),
+                CustomTextFormAuth(
+                  hintText:"enter your address".tr,
+                  labeltext: "address".tr,
+                  iconData: Icons.email_outlined,
+                  mycontroller: addressController,
+                  textInputType: TextInputType.visiblePassword,
+                  pass: false,
+                  ispassword: ispassword,
+                ),
+                CustomTextFormAuth(
+                  hintText:"enter your phone number".tr,
+                  labeltext: "phone number".tr,
+                  iconData: Icons.phone_enabled_rounded,
+                  mycontroller: phoneNumberController,
+                  textInputType: TextInputType.visiblePassword,
+                  pass: false,
+                  ispassword: ispassword,
+                ),
+                CustomTextFormAuth(
+                  hintText: "enter your telegram id".tr,
+                  labeltext:"telegram id".tr,
+                  iconData: Icons.email_outlined,
+                  mycontroller: telegramIdController,
+                  textInputType: TextInputType.visiblePassword,
+                  pass: false,
+                  ispassword: ispassword,
+                ),
+                BlocConsumer<SignupCubit, SignupState>(
+                    listener: (context, state) {
+                  if (state is SignupSuccess) {
+                    Get.to(HomeView());
+                  }
+                  if (state is SignupFailure) {
+                    debugPrint("kkkLoginFailure");
+                    Flushbar(
+                      duration: const Duration(seconds: 3),
+                      backgroundColor: Colors.white,
+                      messageColor: Colors.black,
+                      messageSize: h * 0.02,
+                      message:  "the operation can not be completed now".tr,
+                    ).show(context);
+                    // Navigator.pop(context);
+                  }
+                }, builder: (context, state) {
+                  if (state is SignupLoading) {
+                    return
 
-                        Container(
-                        width: double.infinity,
-                        height: h * 0.06,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
+                      Container(
+                      width: double.infinity,
+                      height: h * 0.06,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
 
-                              color: const Color(0x24A4B4EC),
+                            color: const Color(0x24A4B4EC),
 
-                            ),
-                        child: const Align(
-                            alignment: Alignment.center,
-                            child: CircularProgressIndicator(color: Color(
-                                0xff6b70b0),)),
-                      );
+                          ),
+                      child: const Align(
+                          alignment: Alignment.center,
+                          child: CircularProgressIndicator(color: Color(
+                              0xff6b70b0),)),
+                    );
 
 
-                    } else {
-                      return CustomButtonAuth(
-                        text: "إنشاء حساب",
-                        onPressed: () {
-                          if (formkey.currentState!.validate()) {
-                            BlocProvider.of<SignupCubit>(context)
-                                .fetchSignupData({
-                              'name': usernameController.text,
-                              'email': emailController.text,
-                              'password': passwordController.text
-                            });
-                          }
-                        },
-                      );
-                    }
-                  }),
+                  } else {
+                    return CustomButtonAuth(
+                      text:"create account".tr ,
+                      onPressed: () {
+                        if (formkey.currentState!.validate()) {
+                          BlocProvider.of<SignupCubit>(context)
+                              .fetchSignupData(
+                            signUp = SignUp(
+                                email: emailController.text,
+                                password: passwordController.text,
+                                user_name: usernameController.text,
+                                first_name: firstnameController.text,
+                                last_name: lastnameController.text,
+                                type: usernameController.text,
+                                address: addressController.text,
+                                telephone: phoneNumberController.text,
+                                telegram_id: telegramIdController.text,
+                                points: usernameController.text,
+                                reservation_allowed: usernameController.text
+                            )
+                          //     {
+                          //   'name': usernameController.text,
+                          //   'email': emailController.text,
+                          //   'password': passwordController.text
+                          // }
+                          );
+                        }
+                      },
+                    );
+                  }
+                }),
 
-                  // CustomButtonAuth(text:  "إنشاء حساب",onPressed: (){Get.to(HomeView());},),
+                // CustomButtonAuth(text:  "إنشاء حساب",onPressed: (){Get.to(HomeView());},),
 
-                  SizedBox(
-                    height: h * 0.02,
-                  ),
-                ],
-              ),
+                SizedBox(
+                  height: h * 0.02,
+                ),
+              ],
             ),
           ),
         ),

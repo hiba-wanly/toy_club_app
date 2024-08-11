@@ -3,6 +3,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:toy_club_app/constant.dart';
 import 'package:toy_club_app/core/widgets/primary_header_container.dart';
 
@@ -134,25 +135,25 @@ class _AboutTabBarState extends State<AboutTabBar> {
               Column(
                 children: <Widget>[
                   Text('4.6', style: TextStyle(fontSize: w*0.035, fontWeight: FontWeight.bold,color: Color(0x88282827),)),
-                  Text('التقييم', style: TextStyle(fontSize: w*0.03,color: Color(0x88282827),)),
+                  Text("rate", style: TextStyle(fontSize: w*0.03,color: Color(0x88282827),)),
                 ],
               ),
               Column(
                 children: <Widget>[
                   Text('830', style: TextStyle(fontSize: w*0.035, fontWeight: FontWeight.bold,color: Color(0x88282827),)),
-                  Text('عدد القطع', style: TextStyle(fontSize: w*0.03,color: Color(0x88282827),)),
+                  Text("number of pieces".tr, style: TextStyle(fontSize: w*0.03,color: Color(0x88282827),)),
                 ],
               ),
               Column(
                 children: <Widget>[
                   Text('10+', style: TextStyle(fontSize: w*0.035, fontWeight: FontWeight.bold,color: Color(0x88282827),)),
-                  Text('العمر', style: TextStyle(fontSize: w*0.03,color: Color(0x88282827),)),
+                  Text("age".tr, style: TextStyle(fontSize: w*0.03,color: Color(0x88282827),)),
                 ],
               ),
               Column(
                 children: <Widget>[
                   Text('#42123', style: TextStyle(fontSize: w*0.035, fontWeight: FontWeight.bold,color: Color(0x88282827),)),
-                  Text('رقم القطعة', style: TextStyle(fontSize: w*0.03,color: Color(0x88282827),)),
+                  Text("item".tr, style: TextStyle(fontSize: w*0.03,color: Color(0x88282827),)),
                 ],
               ),
             ],
@@ -213,7 +214,7 @@ class _AboutTabBarState extends State<AboutTabBar> {
               // Colors.yellow,.
               textColor: Colors.black,
               child: Text(
-                'اللعبة متاحة ,احجز الأن !  ',
+                "the game is available ,book now! ".tr,
                 style: TextStyle(
                     fontSize: 0.035 * w,
                     fontWeight: FontWeight.w500,
@@ -227,7 +228,7 @@ class _AboutTabBarState extends State<AboutTabBar> {
                color: availability==0? Color(0xfff8f8f8) : Colors.yellow,
               textColor: Colors.black,
               child: Text(
-                "غير متاحة حالياً",
+                "Not Currently available".tr,
                 style: TextStyle(
                     fontSize: 0.035 * w,
                     fontWeight: FontWeight.w500,

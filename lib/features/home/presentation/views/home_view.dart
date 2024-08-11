@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:toy_club_app/constant.dart';
 import 'package:toy_club_app/core/widgets/primary_header_container.dart';
 import 'package:toy_club_app/features/home/presentation/views/filters_view.dart';
@@ -19,81 +20,77 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
     h = MediaQuery.of(context).size.height;
     w = MediaQuery.of(context).size.width;
     TabController tabController = TabController(length: 3, vsync: this);
-    return Directionality(
-      textDirection: TextDirection.rtl,
-      child: Scaffold(
-        resizeToAvoidBottomInset: true,
-        extendBodyBehindAppBar: true,
-        body: NestedScrollView(
-            headerSliverBuilder:
-                (BuildContext context, bool innerBoxIsScrolled) {
-              return <Widget>[
-              ];
-            },
-            body: Column(children: [
-              TPrimaryHeaderContainer(
-                w: w,
-                h: h,
-                text: "الصفحة الرئيسية",
-                img: AppImagesAssets.welcomeImg,
+    return Scaffold(
+      resizeToAvoidBottomInset: true,
+      extendBodyBehindAppBar: true,
+      body: NestedScrollView(
+          headerSliverBuilder:
+              (BuildContext context, bool innerBoxIsScrolled) {
+            return <Widget>[];
+          },
+          body: Column(children: [
+            TPrimaryHeaderContainer(
+              w: w,
+              h: h,
+              text: "Home".tr,
+              img: AppImagesAssets.welcomeImg,
+            ),
+            Align(
+              alignment: Alignment.centerRight,
+              child: TabBar(
+                controller: tabController,
+                isScrollable: true,
+                labelPadding: EdgeInsets.only(left: w * 0.1, right: w * 0.1),
+                labelColor: Colors.yellow,
+                unselectedLabelColor: Color(0x88282827),
+                indicator: UnderlineTabIndicator(
+                  borderSide: BorderSide(width: 2.3, color: kPrimaryColor),
+                  insets:
+                      EdgeInsets.symmetric(horizontal: w * 0.27, vertical: 0),
+                ),
+                tabs: [
+                  Tab(
+                      child: Text(
+                    "Lego",
+                    overflow: TextOverflow.clip,
+                    maxLines: 1,
+                    style: TextStyle(fontFamily: Almarai, fontSize: w * 0.04),
+                  )),
+                  Tab(
+                      child: Text(
+                    "puzzle",
+                    overflow: TextOverflow.clip,
+                    maxLines: 1,
+                    style: TextStyle(fontFamily: Almarai, fontSize: w * 0.04),
+                  )),
+                  Tab(
+                      child: Image(
+                    width: w * 0.08,
+                    image: AssetImage(
+                        "assets/images/Screenshot_20240521_212335-removebg-preview.png"),
+                  )),
+                ],
               ),
-              Align(
-                alignment: Alignment.centerRight,
-                child: TabBar(
+            ),
+            Divider(
+              color: Colors.yellow,
+              height: 0,
+              thickness: 1,
+            ),
+            Flexible(
+              child: Container(
+                height: h,
+                child: TabBarView(
                   controller: tabController,
-                  isScrollable: true,
-                  labelPadding: EdgeInsets.only(left: w * 0.1, right: w * 0.1),
-                  labelColor: Colors.yellow,
-                  unselectedLabelColor: Color(0x88282827),
-                  indicator: UnderlineTabIndicator(
-                    borderSide: BorderSide(width: 2.3, color: kPrimaryColor),
-                    insets:
-                        EdgeInsets.symmetric(horizontal: w * 0.27, vertical: 0),
-                  ),
-                  tabs: [
-                    Tab(
-                        child: Text(
-                      "Lego",
-                      overflow: TextOverflow.clip,
-                      maxLines: 1,
-                      style: TextStyle(fontFamily: Almarai, fontSize: w * 0.04),
-                    )),
-                    Tab(
-                        child: Text(
-                      "puzzle",
-                      overflow: TextOverflow.clip,
-                      maxLines: 1,
-                      style: TextStyle(fontFamily: Almarai, fontSize: w * 0.04),
-                    )),
-                    Tab(
-                        child: Image(
-                      width: w * 0.08,
-                      image: AssetImage(
-                          "assets/images/Screenshot_20240521_212335-removebg-preview.png"),
-                    )),
+                  children: [
+                    GridViewToyItem(),
+                    GridViewToyItem(),
+                    FiltersView(),
                   ],
                 ),
               ),
-              Divider(
-                color: Colors.yellow,
-                height: 0,
-                thickness: 1,
-              ),
-              Flexible(
-                child: Container(
-                  height: h,
-                  child: TabBarView(
-                    controller: tabController,
-                    children: [
-                      GridViewToyItem(),
-                      GridViewToyItem(),
-                      FiltersView(),
-                    ],
-                  ),
-                ),
-              ),
-            ])),
-      ),
+            ),
+          ])),
     );
   }
 }

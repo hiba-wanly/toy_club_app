@@ -13,8 +13,10 @@ class GridViewToyItem extends StatefulWidget {
 class _GridViewToyItemState extends State<GridViewToyItem> {
   double h = 1;
   double w = 1;
+
   @override
   Widget build(BuildContext context) {
+    var textDirection = Directionality.of(context);
     h = MediaQuery.of(context).size.height;
     w = MediaQuery.of(context).size.width;
 
@@ -49,23 +51,29 @@ class _GridViewToyItemState extends State<GridViewToyItem> {
                   ),
                 ),
                 Positioned(
-                    right: w * 0.03,
+                    right:textDirection==TextDirection.rtl ? w * 0.03 : null,
+                    left:textDirection==TextDirection.rtl ?  null:  w * 0.03 ,
                     top: h * 0.015,
                     child: Text(
-                      "الاسم",
+                     "name".tr,
                       style:
                           TextStyle(
                               color: Colors.white, fontFamily: Almarai,fontWeight: FontWeight.w600),
                     )),
                 Positioned(
-                    right: w * 0.03,
+                    right:textDirection==TextDirection.rtl ? w * 0.03 : null,
+                    left:textDirection==TextDirection.rtl ?  null:  w * 0.03,
                     bottom: 20,
                     // top:100,
                     child: Opacity(
                       opacity: 0.9,
                       child: Container(
                         padding:
-                            EdgeInsets.symmetric(horizontal: w*0.008, vertical: h*0.005),
+                            EdgeInsets.
+                        symmetric(
+                            horizontal: textDirection==TextDirection.rtl ? w*0.01 : w*0.008 ,
+
+                            vertical: h*0.005),
                         decoration: BoxDecoration(
                           color: Colors.white24,
                           borderRadius:BorderRadius.circular(18)

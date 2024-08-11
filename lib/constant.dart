@@ -10,6 +10,7 @@ const backgroundcolor = Colors.white;
  class AppRoute{
    static const String login = "/login";
    static const String signUp = "/signup";
+   static const String language = "/language";
  }
  class AppImagesAssets{
    static const String welcomeImg ='assets/images/img.png' ;

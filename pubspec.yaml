@@ -57,6 +57,7 @@ dependencies:
   flutter_iconpicker:
 
 dev_dependencies:
+
   hive_generator:
   build_runner:
   flutter_test:

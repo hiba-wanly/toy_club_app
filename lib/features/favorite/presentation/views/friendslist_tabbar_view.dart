@@ -14,7 +14,7 @@ class _FriendsListViewState extends State<FriendsListView> {
   Widget build(BuildContext context) {
     h = MediaQuery.of(context).size.height;
     w = MediaQuery.of(context).size.width;
-    return Directionality(textDirection: TextDirection.rtl, child: Scaffold(
+    return Scaffold(
       body:   Flexible(
           child: ListView.separated(
               itemBuilder: (BuildContext context, int index) {
@@ -75,6 +75,6 @@ class _FriendsListViewState extends State<FriendsListView> {
                     thickness: 2,
                   ),
               itemCount: 10)),
-    ));
+    );
   }
 }

@@ -18,9 +18,11 @@ class TPrimaryHeaderContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var textDirection = Directionality.of(context);
     return TCurvedEdgetWidget(
       w: w,
       h: h,
+
       child: Container(
           color: kPrimaryColor,
           padding: const EdgeInsets.only(bottom: 0),
@@ -40,8 +42,11 @@ class TPrimaryHeaderContainer extends StatelessWidget {
                 ),
               ),
             ),
-                Positioned(top:h*0.04,
-                  right: w*0.025,
+                Positioned(
+                  top:h*0.04,
+                  right: textDirection==TextDirection.rtl ? w*0.025: null,
+                  left: textDirection==TextDirection.rtl ?null : w*0.025,
+                  // right: w*0.025,
                   child: Text(text,style: TextStyle(
                     color: Colors.white,
                     fontSize: w * 0.05,

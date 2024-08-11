@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:toy_club_app/constant.dart';
 
 class FiltersView extends StatefulWidget {
@@ -24,8 +25,12 @@ class _FiltersViewState extends State<FiltersView> {
   Widget build(BuildContext context) {
     h = MediaQuery.of(context).size.height;
     w = MediaQuery.of(context).size.width;
+    var textDirection = Directionality.of(context);
+    print("saaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaddddddddddddddddd");
+    print(
+        textDirection);
     return Directionality(
-      textDirection: TextDirection.ltr,
+      textDirection:textDirection==TextDirection.ltr ? TextDirection.rtl:TextDirection.ltr ,
       child: Scaffold(
         body: Container(
           margin:
@@ -35,7 +40,7 @@ class _FiltersViewState extends State<FiltersView> {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: <Widget>[
               Text(
-                "قابلية الإعارة",
+                "Loana ability".tr,
                 style: TextStyle(
                     fontSize: 0.05 * w,
                     fontWeight: FontWeight.w500,
@@ -55,7 +60,7 @@ class _FiltersViewState extends State<FiltersView> {
                     backgroundColor: Color(0xfff8f8f8),
                     selectedColor: Colors.yellow,
                     label: Text(
-                      'المتاحة',
+                      'ability'.tr,
                       style:
                           TextStyle(fontSize: 0.035 * w, fontFamily: Almarai),
                     ),
@@ -79,7 +84,7 @@ class _FiltersViewState extends State<FiltersView> {
                     ),
                     backgroundColor: Color(0xfff8f8f8),
                     selectedColor: Colors.yellow,
-                    label: Text('الغير متاحة',
+                    label: Text("not ability".tr,
                         style: TextStyle(
                             fontSize: 0.035 * w, fontFamily: Almarai)),
                     selected: _backOrder,
@@ -93,7 +98,7 @@ class _FiltersViewState extends State<FiltersView> {
                 ],
               ),
               Text(
-                "عدد النقاط",
+                "number of points".tr,
                 style: TextStyle(
                     fontSize: 0.05 * w,
                     fontWeight: FontWeight.w500,
@@ -160,7 +165,7 @@ class _FiltersViewState extends State<FiltersView> {
                 ),
               ),
               Text(
-                "العمر",
+                "age".tr,
                 style: TextStyle(
                     fontSize: 0.05 * w,
                     fontWeight: FontWeight.w500,
@@ -269,7 +274,7 @@ class _FiltersViewState extends State<FiltersView> {
                 ],
               ),
               Text(
-                "الاهتمامات",
+               "Interest".tr,
                 style: TextStyle(
                     fontSize: 0.05 * w,
                     fontWeight: FontWeight.w500,
@@ -310,7 +315,7 @@ class _FiltersViewState extends State<FiltersView> {
                 }).toList(),
               ),
               Text(
-                "عدد القطع",
+                "number of pieces".tr,
                 style: TextStyle(
                     fontSize: 0.05 * w,
                     fontWeight: FontWeight.w500,
@@ -410,7 +415,7 @@ class _FiltersViewState extends State<FiltersView> {
                   children: [
                     Icon(Icons.refresh),
                     Text(
-                      'استعادة  ',
+                      "restore".tr,
                       style: TextStyle(
                           fontSize: 0.035 * w,
                           fontWeight: FontWeight.w500,
@@ -426,7 +431,7 @@ class _FiltersViewState extends State<FiltersView> {
                 color: Colors.yellow,
                 textColor: Colors.black,
                 child: Text(
-                  'عرض '+" 44 "+ ' نتيجة >',
+                  "show".tr +" 44 "+"result".tr,
                   style: TextStyle(
                       fontSize: 0.035 * w,
                       fontWeight: FontWeight.w500,
