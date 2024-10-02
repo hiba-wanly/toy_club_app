@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Toys {
+  dynamic id;
   dynamic type_id;
   dynamic brand;
   dynamic sub_brand;
@@ -16,7 +17,9 @@ class Toys {
   dynamic description;
 
   Toys(
-      {this.type_id,
+      {
+        this.id,
+        this.type_id,
       this.brand,
       this.sub_brand,
       this.set_number,
@@ -55,6 +58,7 @@ class Toys {
 
   Toys.fromJson(Map<String, dynamic> json) {
     debugPrint("11111112222222222222233333");
+    id = json['id'];
     type_id = json['type_id'];
     debugPrint(type_id.toString());
     brand = json['brand'];

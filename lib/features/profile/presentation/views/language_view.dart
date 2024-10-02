@@ -10,6 +10,18 @@ class LanguageView extends GetView<LocaleController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        // title: Text(
+        //   "Settings".tr,
+        //   style: Theme.of(context)
+        //       .textTheme
+        //       .headlineSmall!
+        //       .copyWith(color: Colors.grey),
+        // ),
+        backgroundColor: kPrimaryColor,
+        centerTitle: true,
+        elevation: 0.0,
+      ),
       body: Container(
         padding: EdgeInsets.all(15),
         child: Column(

@@ -7,10 +7,12 @@ import 'package:toy_club_app/features/login/presentation/views/login_view.dart';
 import 'package:toy_club_app/features/signup/presentation/views/signup_view.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:awesome_icons/awesome_icons.dart';
+import 'package:toy_club_app/features/srevices/repository.dart';
 import 'package:toy_club_app/features/welcome/presentation/views/widgets/custom_button_welcome.dart';
 
 class WelcomeView extends StatefulWidget {
-  const WelcomeView({super.key});
+  Repository? repository;
+   WelcomeView({super.key,  this.repository});
 
   @override
   State<WelcomeView> createState() => _WelcomeViewState();
@@ -60,14 +62,14 @@ class _WelcomeViewState extends State<WelcomeView> {
                 prefixIcon: Icons.account_circle_outlined,
                 text: "login into account".tr,
                 onPressed: () {
-                  Get.to(const LoginView());
+                  Get.to( LoginView(repository: widget.repository,));
                 }),
             SizedBox(height: h * 0.02),
             CustomButtonWelcome(
               prefixIcon: Icons.person_add,
               text: "Registration".tr,
               onPressed: () {
-                Get.to(const SignUpView());
+                Get.to( SignUpView(repository: widget.repository,));
               },
             ),
           ],

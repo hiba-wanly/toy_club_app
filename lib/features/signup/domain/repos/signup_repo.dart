@@ -6,4 +6,6 @@ abstract class SignupRepo {
   Future<Either<ServerFailure, SignUp>> fetchSignupData(
       Map<String, dynamic> data2);
   Future<Either<ServerFailure, SignUp>> logoutUser(dynamic id);
+  Future<Either<ServerFailure,String>> fetchLogin();
+
 }

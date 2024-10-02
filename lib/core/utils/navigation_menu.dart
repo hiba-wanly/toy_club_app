@@ -5,9 +5,10 @@ import 'package:toy_club_app/features/home/presentation/views/home_view.dart';
 import 'package:toy_club_app/features/orders/presentation/views/orders_view.dart';
 import 'package:toy_club_app/features/profile/presentation/views/profile_view.dart';
 import 'package:toy_club_app/features/favorite/presentation/views/wishlist_view.dart';
+import 'package:toy_club_app/features/srevices/repository.dart';
 
 class NavigationMenu extends StatelessWidget {
-  const NavigationMenu({super.key});
+ const  NavigationMenu({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +48,7 @@ class NavigationMenu extends StatelessWidget {
 }
 
 class NavigationController extends GetxController {
+
   final Rx<int> selectedIndex = 0.obs;
   final screens = [
     HomeView(),

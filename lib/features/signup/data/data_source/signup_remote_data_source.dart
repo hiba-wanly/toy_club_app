@@ -1,6 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:toy_club_app/constant.dart';
 import 'package:toy_club_app/core/utils/api_service.dart';
+import 'package:toy_club_app/core/utils/auth.dart';
+import 'package:toy_club_app/core/utils/functions/save_login.dart';
 import 'package:toy_club_app/features/signup/data/models/signup_model.dart';
 
 abstract class SignupRemoteDataSource {
@@ -10,15 +13,17 @@ abstract class SignupRemoteDataSource {
 
 class SignupRemoteDataSourceImpl extends SignupRemoteDataSource {
   final ApiService apiService;
-  SignupRemoteDataSourceImpl(this.apiService);
+  SignupRemoteDataSourceImpl(this.apiService );
 
+  ApiLog apiLog = ApiLog();
   @override
   Future<SignUp> fetchSignupData(Map<String, dynamic> data2) async {
     debugPrint("DDDDDDDDDDDDDDDDDDDd");
-    var data = await apiService.post(data1: data2, endPoint: 'api/register');
+    var data = await apiLog.postLR(data1: data2, endPoint: 'api/user/register');
     debugPrint("WEAREHERE12121212121222");
     debugPrint(data.toString());
     SignUp nums = getSignup(data);
+    saveLoginData(nums, kLoginBox);
     debugPrint("WEAREHERE");
     debugPrint(nums.toString());
     return nums;

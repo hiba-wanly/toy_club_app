@@ -1,10 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:toy_club_app/core/utils/api_service.dart';
+import 'package:toy_club_app/features/home/data/models/toy_type.dart';
 import 'package:toy_club_app/features/home/data/models/toys_model.dart';
 
 abstract class HomeRemoteDataSource {
-  Future<Toys> fetchHomeData();
+  Future<List<ToyType>> fetchHomeData();
 
 }
 
@@ -13,11 +14,11 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSource {
   HomeRemoteDataSourceImpl(this.apiService);
 
   @override
-  Future<Toys> fetchHomeData() async {
-    var data = await apiService.get( endPoint:"" );
+  Future<List<ToyType>> fetchHomeData() async {
+    var data = await apiService.get( endPoint:"api/toy/type/get-all" );
     debugPrint("WEAREHERE12121212121222");
     debugPrint(data.toString());
-    Toys nums = getToys(data);
+    List<ToyType> nums = getToyType(data);
     debugPrint("WEAREHERE");
     debugPrint(nums.toString());
     return nums;
@@ -25,11 +26,16 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSource {
 
 
 
-  Toys getToys(Map<String, dynamic> data) {
+  List<ToyType> getToyType(Map<String, dynamic> data) {
     debugPrint("123456789");
-    Toys nums = Toys.fromJson(data);
+    // Toys nums = Toys.fromJson(data);.
+    List<ToyType> nums=[];
+    for(var numMap in data['data']){
+    nums.add(ToyType.fromJson(numMap));
+    }
     debugPrint("HRHRRTTTTTTTT");
     debugPrint(nums.toString());
     return nums;
   }
+
 }

@@ -1,10 +1,14 @@
 import 'dart:io';
-
+import 'package:hive/hive.dart';
 import 'package:flutter/material.dart';
 
+// @HiveType(typeId: 0)
 class Login {
+  // @HiveField(0)
   dynamic id;
+  // @HiveField(1)
   dynamic email;
+  // @HiveField(2)
   dynamic password;
 
   Login({

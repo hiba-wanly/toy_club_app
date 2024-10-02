@@ -4,7 +4,8 @@ import 'package:toy_club_app/core/utils/api_service.dart';
 import 'package:toy_club_app/features/orders/data/models/order_model.dart';
 
 abstract class OrderRemoteDataSource {
-  Future<OrderS> fetchOrderData(Map<String, dynamic> data2);
+  Future<List<OrderS>> fetchOrderData();
+  Future<List<OrderS>> addOrderData(Map<String , dynamic> data1);
 }
 
 class OrderRemoteDataSourceImpl extends OrderRemoteDataSource {
@@ -12,11 +13,11 @@ class OrderRemoteDataSourceImpl extends OrderRemoteDataSource {
   OrderRemoteDataSourceImpl(this.apiService);
 
   @override
-  Future<OrderS> fetchOrderData(Map<String, dynamic> data2) async {
-    var data = await apiService.post(data1: data2, endPoint: '');
+  Future<List<OrderS>> fetchOrderData() async {
+    var data = await apiService.get( endPoint: 'api/order/get-by-user-id',);
     debugPrint("WEAREHERE12121212121222");
     debugPrint(data.toString());
-    OrderS nums = getOrder(data);
+    List<OrderS> nums = getOrder(data);
     debugPrint("WEAREHERE");
     debugPrint(nums.toString());
     return nums;
@@ -24,10 +25,25 @@ class OrderRemoteDataSourceImpl extends OrderRemoteDataSource {
 
 
 
-  OrderS getOrder(Map<String, dynamic> data) {
+  List<OrderS> getOrder(Map<String, dynamic> data) {
     debugPrint("123456789");
-    OrderS nums = OrderS.fromJson(data);
+    // List<OrderS> nums = OrderS.fromJson(data);
+    List<OrderS> nums=[];
+    for(var numMap in data['data']){
+      nums.add(OrderS.fromJson(numMap));
+    }
     debugPrint("HRHRRTTTTTTTT");
+    debugPrint(nums.toString());
+    return nums;
+  }
+
+  @override
+  Future<List<OrderS>> addOrderData(Map<String, dynamic> data1) async {
+    var data = await apiService.post( endPoint: 'api/order/add', data1: data1,);
+    debugPrint("WEAREHERE12121212121222");
+    debugPrint(data.toString());
+    List<OrderS> nums = getOrder(data);
+    debugPrint("WEAREHERE");
     debugPrint(nums.toString());
     return nums;
   }

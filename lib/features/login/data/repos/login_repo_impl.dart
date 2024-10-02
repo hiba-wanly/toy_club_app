@@ -5,6 +5,7 @@ import 'package:toy_club_app/core/errors/failure.dart';
 import 'package:toy_club_app/features/login/data/data_source/login_remote_data_source.dart';
 import 'package:toy_club_app/features/login/data/models/login_model.dart';
 import 'package:toy_club_app/features/login/domain/repos/login_repo.dart';
+import 'package:toy_club_app/features/signup/data/models/signup_model.dart';
 
 class LoginRepoImpl extends LoginRepo {
   final LoginRemoteDataSource loginRemoteDataSource;
@@ -14,11 +15,11 @@ class LoginRepoImpl extends LoginRepo {
   });
 
   @override
-  Future<Either<ServerFailure, Login>> fetchLoginData(
+  Future<Either<ServerFailure, SignUp>> fetchLoginData(
       Map<String, dynamic> data2) async {
     try {
       debugPrint("KKKHEREERER");
-      Login nums;
+      SignUp nums;
       nums = await loginRemoteDataSource.fetchLoginData(data2);
       debugPrint("AAAAAAAA");
       debugPrint(nums.toString());
@@ -26,6 +27,7 @@ class LoginRepoImpl extends LoginRepo {
     } catch (e) {
       if (e is DioError) {
         debugPrint("ERORRORORO11111111111");
+        debugPrint(e.toString());
         return left(ServerFailure("cannot login "));
       }
       debugPrint("ERORROROR22222222222");
@@ -35,11 +37,11 @@ class LoginRepoImpl extends LoginRepo {
   }
 
   @override
-  Future<Either<ServerFailure, Login>> logoutUser(dynamic id) async {
+  Future<Either<ServerFailure, String>> logoutUser() async {
     try {
       debugPrint("ADDMATERIALLLLLLL");
-      Login nums;
-      nums = await loginRemoteDataSource.logoutUser(id);
+      String nums;
+      nums = await loginRemoteDataSource.logoutUser();
       return right(nums);
     } catch (e) {
       if (e is DioError) {

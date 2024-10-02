@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:toy_club_app/constant.dart';
+import 'package:toy_club_app/features/home/data/models/toys_model.dart';
 import 'package:toy_club_app/features/home/presentation/views/details_view.dart';
 
 class GridViewToyItem extends StatefulWidget {
-  const GridViewToyItem({super.key});
+   List<Toys> toy;
+   GridViewToyItem({super.key, required this.toy});
 
   @override
   State<GridViewToyItem> createState() => _GridViewToyItemState();
@@ -23,13 +25,14 @@ class _GridViewToyItemState extends State<GridViewToyItem> {
     return GridView.builder(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2, childAspectRatio: (w / (h / 1.7))),
-        shrinkWrap: true,
-        physics: ScrollPhysics(),
-        itemCount: 19,
+        // shrinkWrap: true,
+        physics:  const NeverScrollableScrollPhysics(),
+        itemCount: widget.toy.length,
+        scrollDirection: Axis.vertical,
         itemBuilder: (BuildContext context, index) {
           return InkWell(
             onTap: () {
-                  Get.to(DetailsView());
+                  Get.to(DetailsView( toy : widget.toy[index]));
             },
             child: Card(
               clipBehavior: Clip.antiAlias,
@@ -55,7 +58,7 @@ class _GridViewToyItemState extends State<GridViewToyItem> {
                     left:textDirection==TextDirection.rtl ?  null:  w * 0.03 ,
                     top: h * 0.015,
                     child: Text(
-                     "name".tr,
+                      widget.toy[index].sub_brand,
                       style:
                           TextStyle(
                               color: Colors.white, fontFamily: Almarai,fontWeight: FontWeight.w600),
@@ -79,7 +82,7 @@ class _GridViewToyItemState extends State<GridViewToyItem> {
                           borderRadius:BorderRadius.circular(18)
                         ),
                         child: Text(
-                          " عدد النقاط "+"100",
+                          widget.toy[index].required_points,
                           style:
                               TextStyle(color: Colors.white, fontFamily: Almarai,fontWeight: FontWeight.bold),
                         ),

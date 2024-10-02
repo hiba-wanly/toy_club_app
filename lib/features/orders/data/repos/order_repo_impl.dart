@@ -14,25 +14,48 @@ class OrderRepoImpl extends OrderRepo {
   });
 
   @override
-  Future<Either<ServerFailure, OrderS>> fetchOrderData(
-      Map<String, dynamic> data2) async {
+  Future<Either<ServerFailure, List<OrderS>>> fetchOrderData(
+      ) async {
     try {
       debugPrint("KKKHEREERER");
-      OrderS nums;
-      nums = (await orderRemoteDataSource.fetchOrderData(data2)) ;
+      List<OrderS> nums;
+      nums = (await orderRemoteDataSource.fetchOrderData()) ;
       debugPrint("AAAAAAAA");
       debugPrint(nums.toString());
       return right(nums);
     } catch (e) {
       if (e is DioError) {
         debugPrint("ERORRORORO11111111111");
-        return left(ServerFailure("cannot fetch orders "));
+        debugPrint(e.toString());
+        return left(ServerFailure(e.toString()));
       }
       debugPrint("ERORROROR22222222222");
       debugPrint(e.toString());
       return left(ServerFailure(e.toString()));
     }
   }
+
+  @override
+  Future<Either<ServerFailure, List<OrderS>>> addOrderData(Map<String, dynamic> data1) async {
+    try {
+      debugPrint("KKKHEREERER");
+      List<OrderS> nums;
+      nums = (await orderRemoteDataSource.addOrderData(data1)) ;
+      debugPrint("AAAAAAAA");
+      debugPrint(nums.toString());
+      return right(nums);
+    } catch (e) {
+      if (e is DioError) {
+        debugPrint("ERORRORORO11111111111");
+        debugPrint(e.toString());
+        return left(ServerFailure(e.toString()));
+      }
+      debugPrint("ERORROROR22222222222");
+      debugPrint(e.toString());
+      return left(ServerFailure(e.toString()));
+    }
+  }
+
 
 
 

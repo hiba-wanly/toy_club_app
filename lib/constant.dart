@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 const kPrimaryColor = Color(0xffffffff);
+const kLoginBox = 'login_box';
+
 
 const Almarai = "assets/fonts/Almarai-Regular.ttf";
 

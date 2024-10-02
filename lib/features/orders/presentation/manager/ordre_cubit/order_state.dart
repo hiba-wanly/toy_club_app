@@ -14,6 +14,6 @@ class OrderFailure extends OrderState {
 }
 
 class OrderSuccess extends OrderState {
-  final OrderS orderS;
+  final List<OrderS> orderS;
   OrderSuccess(this.orderS);
 }

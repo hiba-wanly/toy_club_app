@@ -44,6 +44,16 @@ class _CustomTextFormAuthState extends State<CustomTextFormAuth> {
           if (value!.isEmpty) {
             return 'الحقل مطلوب';
           }
+          if(widget.mycontroller=="emailController"){
+            if(!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)){
+              return 'enter valid email address';
+            }
+          }
+          if(widget.mycontroller=="usernameController"){
+            if(value!.length <4){
+              return 'user name must be at least 4 characters long';
+            }
+          }
           return null;
         },
         keyboardType: widget.textInputType,

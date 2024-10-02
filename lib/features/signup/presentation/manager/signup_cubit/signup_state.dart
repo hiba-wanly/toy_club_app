@@ -17,3 +17,12 @@ class SignupSuccess extends SignupState{
   final SignUp signup;
   SignupSuccess(this.signup);
 }
+
+
+class SignupSuccessLocal extends SignupState{
+  final String signup;
+  SignupSuccessLocal(this.signup);
+}
+
+
+

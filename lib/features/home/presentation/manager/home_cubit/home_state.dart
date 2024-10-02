@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:toy_club_app/features/home/data/models/toy_type.dart';
 import 'package:toy_club_app/features/home/data/models/toys_model.dart';
 
 @immutable
@@ -14,6 +15,6 @@ class HomeFailure extends HomeState {
 }
 
 class HomeSuccess extends HomeState {
-  final Toys toys;
-  HomeSuccess(this.toys);
+  final List<ToyType> toystype;
+  HomeSuccess(this.toystype);
 }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'package:toy_club_app/core/errors/failure.dart';
 import 'package:toy_club_app/features/home/data/data_source/home_remote_data_source.dart';
+import 'package:toy_club_app/features/home/data/models/toy_type.dart';
 import 'package:toy_club_app/features/home/data/models/toys_model.dart';
 import 'package:toy_club_app/features/home/domain/repos/home_repo.dart';
 
@@ -14,10 +15,10 @@ class HomeRepoImpl extends HomeRepo {
   });
 
   @override
-  Future<Either<ServerFailure, Toys>> fetchHomeData() async {
+  Future<Either<ServerFailure, List<ToyType>>> fetchHomeData() async {
     try {
       debugPrint("KKKHEREERER");
-      Toys nums;
+      List<ToyType> nums;
       nums = await homeRemoteDataSource.fetchHomeData();
       debugPrint("AAAAAAAA");
       debugPrint(nums.toString());

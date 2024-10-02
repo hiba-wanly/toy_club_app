@@ -37,7 +37,7 @@ class TPrimaryHeaderContainer extends StatelessWidget {
                     img,
                     fit: BoxFit.cover,
                     width: w,
-                    height: h * 0.11,
+                    height: h * 0.15,
                   ),
                 ),
               ),

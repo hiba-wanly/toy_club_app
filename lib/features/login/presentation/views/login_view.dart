@@ -5,15 +5,18 @@ import 'package:get/get.dart';
 import 'package:toy_club_app/constant.dart';
 import 'package:toy_club_app/core/utils/navigation_menu.dart';
 import 'package:toy_club_app/core/widgets/auth/custom_textform_auth.dart';
+import 'package:toy_club_app/core/widgets/loading_buttom.dart';
 import 'package:toy_club_app/features/home/presentation/views/home_view.dart';
 import 'package:toy_club_app/features/login/presentation/manager/login_cubit/login_cubit.dart';
 import 'package:toy_club_app/features/login/presentation/manager/login_cubit/login_state.dart';
 import 'package:toy_club_app/features/login/presentation/views/widgets/custom_button_auth.dart';
 import 'package:toy_club_app/features/login/presentation/views/widgets/logo_auth.dart';
+import 'package:toy_club_app/features/srevices/repository.dart';
 
 
 class LoginView extends StatefulWidget {
-  const LoginView({super.key});
+  Repository? repository;
+   LoginView({super.key, this.repository});
 
   @override
   State<LoginView> createState() => _LoginViewState();
@@ -52,94 +55,87 @@ class _LoginViewState extends State<LoginView> {
         centerTitle: true,
         elevation: 0.0,
       ),
-      body: Container(
-        padding:  EdgeInsets
-            .only(
-            top: MediaQuery.of(context).size.height * 0.02,
-            bottom: MediaQuery.of(context).size.height * 0.02,
-            left: MediaQuery.of(context).size.width * 0.05,
-            right: MediaQuery.of(context).size.width * 0.05),
+      body: Form(
+        key: formkey,
+        child: Container(
+          padding:  EdgeInsets
+              .only(
+              top: MediaQuery.of(context).size.height * 0.02,
+              bottom: MediaQuery.of(context).size.height * 0.02,
+              left: MediaQuery.of(context).size.width * 0.05,
+              right: MediaQuery.of(context).size.width * 0.05),
 
-        // symmetric( horizontal: 30),
+          // symmetric( horizontal: 30),
 
-        child: ListView(
-          children:  [
-          const LogoAuth(),
-           CustomTextFormAuth(
-              hintText:"enter user name or email".tr,
-              labeltext: "user name".tr,
-              iconData: Icons.email_outlined,
-              mycontroller: emailController,
-               textInputType: TextInputType.emailAddress,
-               pass: false,
-               ispassword: ispassword,
-            ),
+          child: ListView(
+            children:  [
+            const LogoAuth(),
+             CustomTextFormAuth(
+                hintText:"enter user name or email".tr,
+                labeltext: "user name".tr,
+                iconData: Icons.person,
+                mycontroller: emailController,
+                 textInputType: TextInputType.emailAddress,
+                 pass: false,
+                 ispassword: ispassword,
+              ),
 
-            CustomTextFormAuth(
-              hintText: "enter password".tr,
-              labeltext: "password".tr,
-              iconData: Icons.lock_outline,
-              mycontroller: passwordcontroller,
-              textInputType: TextInputType.visiblePassword,
-              pass: true,
-              ispassword: ispassword,
-            ),
+              CustomTextFormAuth(
+                hintText: "enter password".tr,
+                labeltext: "password".tr,
+                iconData: Icons.lock_outline,
+                mycontroller: passwordcontroller,
+                textInputType: TextInputType.visiblePassword,
+                pass: true,
+                ispassword: ispassword,
+              ),
 
-            // BlocConsumer<LoginCubit, LoginState>(
-            //     listener: (context, state) {
-            //       if (state is LoginSuccess) {
-            //         Get.to(HomeView());
-            //       }
-            //       if(state is LoginFailure){
-            //         debugPrint("kkkLoginFailure");
-            //         Flushbar(
-            //           duration: const Duration(seconds: 3),
-            //           backgroundColor: Colors.white,
-            //           messageColor: Colors.black,
-            //           messageSize: h * 0.02,
-            //           message: "لا يمكن اتمام العملية الأن",
-            //         ).show(context);
-            //         // Navigator.pop(context);
-            //       }
-            //     }, builder: (context, state) {
-            //   if (state is LoginLoading) {
-            //     return   Container(
-            //       width: double.infinity,
-            //       height: h * 0.06,
-            //       decoration: BoxDecoration(
-            //         borderRadius: BorderRadius.circular(20),
-            //
-            //         color: const Color(0x24A4B4EC),
-            //
-            //       ),
-            //       child: const Align(
-            //           alignment: Alignment.center,
-            //           child: CircularProgressIndicator(color: Color(
-            //               0xff6b70b0),)),
-            //     );
-            //   }
-            //   else {
-            //     return CustomButtonAuth(
-            //       text: 'تسجيل دخول',
-            //       onPressed: () {
-            //         if (formkey.currentState!.validate()) {
-            //           BlocProvider.of<LoginCubit>(context).fetchLoginData(
-            //               {
-            //                 'email':emailController.text,
-            //                 'password':passwordcontroller.text
-            //               });
-            //         }
-            //       },
-            //
-            //     );
-            //   }
-            // }
-            // ),
+              BlocConsumer<LoginCubit, LoginState>(
+                  listener: (context, state) {
+                    if (state is LoginSuccess) {
 
-            CustomButtonAuth(text: "login".tr,onPressed: (){Get.to(NavigationMenu());},),
+                      widget.repository!.login = state.login;
+                      // Get.to(HomeView(repository:widget.repository!));
+                      Get.to(NavigationMenu());
+                    }
+                    if(state is LoginFailure){
+                      debugPrint("kkkLoginFailure");
+                      Flushbar(
+                        duration: const Duration(seconds: 3),
+                        backgroundColor: Colors.white,
+                        messageColor: Colors.black,
+                        messageSize: h * 0.02,
+                        message: state.errMessage,
+                      ).show(context);
+                      // Navigator.pop(context);
+                    }
+                  }, builder: (context, state) {
+                if (state is LoginLoading) {
+                  return  LoadingButtom();
+                }
+                else {
+                  return CustomButtonAuth(
+                    text: 'تسجيل دخول',
+                    onPressed: () {
+                      if (formkey.currentState!.validate()) {
+                        BlocProvider.of<LoginCubit>(context).fetchLoginData(
+                            {
+                              'user_name':emailController.text,
+                              'password':passwordcontroller.text
+                            });
+                      }
+                    },
+
+                  );
+                }
+              }
+              ),
+
+              // CustomButtonAuth(text: "login".tr,onPressed: (){Get.to(NavigationMenu());},),
 
 
-          ],
+            ],
+          ),
         ),
       ),
     );

@@ -55,13 +55,13 @@ class _WishlistViewState extends State<WishlistView> with TickerProviderStateMix
                     maxLines: 1,
                     style: TextStyle(fontFamily: Almarai, fontSize: w * 0.05),
                   )),
-              Tab(
-                  child: Text(
-                    "friend's list".tr,
-                    overflow: TextOverflow.clip,
-                    maxLines: 1,
-                    style: TextStyle(fontFamily: Almarai, fontSize: w * 0.05),
-                  )),
+              // Tab(
+              //     child: Text(
+              //       "friend's list".tr,
+              //       overflow: TextOverflow.clip,
+              //       maxLines: 1,
+              //       style: TextStyle(fontFamily: Almarai, fontSize: w * 0.05),
+              //     )),
 
             ],
           ),
@@ -78,7 +78,7 @@ class _WishlistViewState extends State<WishlistView> with TickerProviderStateMix
               controller: tabController,
               children: [
                 MyListView(),
-                FriendsListView()
+                // FriendsListView()
 
               ],
             ),

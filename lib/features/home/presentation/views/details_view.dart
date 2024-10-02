@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:toy_club_app/constant.dart';
 import 'package:toy_club_app/core/widgets/primary_header_container.dart';
+import 'package:toy_club_app/features/home/data/models/toys_model.dart';
 import 'package:toy_club_app/features/home/presentation/views/about_tabBar_view.dart';
 import 'package:toy_club_app/features/home/presentation/views/review_tabBar_view.dart';
 
 class DetailsView extends StatefulWidget {
-  const DetailsView({super.key});
+  Toys toy;
+   DetailsView({super.key , required this.toy});
 
   @override
   State<DetailsView> createState() => _DetailsViewState();
@@ -57,13 +59,13 @@ class _DetailsViewState extends State<DetailsView> with TickerProviderStateMixin
                         maxLines: 1,
                         style: TextStyle(fontFamily: Almarai, fontSize: w * 0.05),
                       )),
-                  Tab(
-                      child: Text(
-                        "reviews".tr,
-                        overflow: TextOverflow.clip,
-                        maxLines: 1,
-                        style: TextStyle(fontFamily: Almarai, fontSize: w * 0.05),
-                      )),
+                  // Tab(
+                  //     child: Text(
+                  //       "reviews".tr,
+                  //       overflow: TextOverflow.clip,
+                  //       maxLines: 1,
+                  //       style: TextStyle(fontFamily: Almarai, fontSize: w * 0.05),
+                  //     )),
 
 
                 ],
@@ -80,8 +82,8 @@ class _DetailsViewState extends State<DetailsView> with TickerProviderStateMixin
                 child: TabBarView(
                   controller: tabController,
                   children: [
-                    AboutTabBar(),
-                    ReviewTabBar(),
+                    AboutTabBar(toy:widget.toy),
+                    // ReviewTabBar(),
 
 
                   ],

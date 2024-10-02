@@ -9,6 +9,12 @@ class FetchSignupUseCase extends UseCase<SignUp, NoParam> {
   final SignupRepo signupRepo;
   FetchSignupUseCase(this.signupRepo);
 
+
+  @override
+  Future<Either<Failure, String>> call([NoParam? param]) async{
+    return await signupRepo.fetchLogin();
+  }
+
   @override
   Future<Either<Failure, SignUp>> callLogout(int id, [NoParam? param]) async {
     return await signupRepo.logoutUser(id);

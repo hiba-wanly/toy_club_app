@@ -5,6 +5,7 @@ class MyTranslation extends Translations {
   // TODO: implement keys
   Map<String, Map<String, String>> get keys => {
         "ar": {
+
           "choose Language": "اختر اللغة",
           "login": "تسجيل الدخول",
           "enter password": "أدخل كلمة المرور",
@@ -62,8 +63,12 @@ class MyTranslation extends Translations {
           "my list": "قائمتي",
           "friend's list": "قائمة أصدقائي",
           "Home": "الصفحة الرئيسية",
+          "Update Information" :"تعديل البيانات",
+          "deleteAccount":"حذف الحساب",
         },
         "en": {
+          "deleteAccount":"Delete Account",
+          "Update Information":"Update Information",
           "choose Language": "choose Language",
           "login": "login",
           "enter password": "enter password",
@@ -123,3 +128,4 @@ class MyTranslation extends Translations {
         }
       };
 }
+

@@ -3,15 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:toy_club_app/constant.dart';
+import 'package:toy_club_app/core/utils/navigation_menu.dart';
 import 'package:toy_club_app/core/widgets/auth/custom_textform_auth.dart';
+import 'package:toy_club_app/core/widgets/loading_buttom.dart';
 import 'package:toy_club_app/features/home/presentation/views/home_view.dart';
 import 'package:toy_club_app/features/login/presentation/views/widgets/custom_button_auth.dart';
 import 'package:toy_club_app/features/signup/data/models/signup_model.dart';
 import 'package:toy_club_app/features/signup/presentation/manager/signup_cubit/signup_cubit.dart';
 import 'package:toy_club_app/features/signup/presentation/manager/signup_cubit/signup_state.dart';
+import 'package:toy_club_app/features/srevices/repository.dart';
 
 class SignUpView extends StatefulWidget {
-  const SignUpView({super.key});
+  Repository? repository;
+  SignUpView({super.key, this.repository});
 
   @override
   State<SignUpView> createState() => _SignUpViewState();
@@ -85,7 +89,7 @@ class _SignUpViewState extends State<SignUpView> {
                   labeltext:"email".tr,
                   iconData: Icons.email_outlined,
                   mycontroller: emailController,
-                  textInputType: TextInputType.visiblePassword,
+                  textInputType: TextInputType.emailAddress,
                   pass: false,
                   ispassword: ispassword,
                 ),
@@ -138,7 +142,9 @@ class _SignUpViewState extends State<SignUpView> {
                 BlocConsumer<SignupCubit, SignupState>(
                     listener: (context, state) {
                   if (state is SignupSuccess) {
-                    Get.to(HomeView());
+                    // widget.repository!.login = state.signup;
+                    // Get.to(HomeView(repository:widget.repository!));
+                    Get.to(NavigationMenu());
                   }
                   if (state is SignupFailure) {
                     debugPrint("kkkLoginFailure");
@@ -147,7 +153,7 @@ class _SignUpViewState extends State<SignUpView> {
                       backgroundColor: Colors.white,
                       messageColor: Colors.black,
                       messageSize: h * 0.02,
-                      message:  "the operation can not be completed now".tr,
+                      message:  state.errMessage,
                     ).show(context);
                     // Navigator.pop(context);
                   }
@@ -155,20 +161,7 @@ class _SignUpViewState extends State<SignUpView> {
                   if (state is SignupLoading) {
                     return
 
-                      Container(
-                      width: double.infinity,
-                      height: h * 0.06,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-
-                            color: const Color(0x24A4B4EC),
-
-                          ),
-                      child: const Align(
-                          alignment: Alignment.center,
-                          child: CircularProgressIndicator(color: Color(
-                              0xff6b70b0),)),
-                    );
+                      LoadingButtom();
 
 
                   } else {
@@ -203,7 +196,7 @@ class _SignUpViewState extends State<SignUpView> {
                   }
                 }),
 
-                // CustomButtonAuth(text:  "إنشاء حساب",onPressed: (){Get.to(HomeView());},),
+                // CustomButtonAuth(text: "Registration".tr,onPressed: (){Get.to(NavigationMenu());},),
 
                 SizedBox(
                   height: h * 0.02,
